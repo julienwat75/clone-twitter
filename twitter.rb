@@ -19,11 +19,7 @@ get "/" do
 end
 
 get "/formulaire_de_connexion" do
-  "Qui êtes-vous ?
-
-  <form action='/connexion' method='post'>
-    <input type='text' name='pseudo'>
-  </form>"
+  erb :formulaire_de_connexion
 end
 
 post "/connexion" do
@@ -38,11 +34,7 @@ post "/deconnexion" do
 end
 
 get "/formulaire_de_tweet" do
-  "Quoi de neuf ?
-
-  <form action='/publier_un_tweet' method='post'>
-    <input type='text' name='contenu'>
-  </form>"
+  erb :formulaire_de_tweet
 end
 
 post "/publier_un_tweet" do
