@@ -93,3 +93,13 @@ post "/creer_compte" do
 
   redirect '/'
 end
+
+# ----------
+# mon profil
+# ----------
+
+get "/utilisateurs/:pseudo" do
+  pseudo = params["pseudo"]
+  @utilisateur = Utilisateur.find_by_pseudo(pseudo)
+  erb :profil_utilisateur
+end

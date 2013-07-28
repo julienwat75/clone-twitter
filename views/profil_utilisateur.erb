@@ -1,0 +1,9 @@
+<h2>@<%= @utilisateur.pseudo %></h2>
+
+<ul>
+  <% @utilisateur.tweets.each do |tweet| %>
+    <li><%= tweet.contenu %> à <%= tweet.date %> par <%= tweet.utilisateur.pseudo %></li>
+  <% end %>
+</ul>
+
+
