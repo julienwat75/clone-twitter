@@ -4,3 +4,4 @@ gem 'pry'
 
 gem "rainbow"
 gem "sinatra"
+gem "sinatra-contrib"

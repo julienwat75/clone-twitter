@@ -3,6 +3,7 @@
 require "pry"
 
 require "sinatra"
+require "sinatra/cookies"
 
 get "/" do
   binding.pry
@@ -14,6 +15,7 @@ end
 
 get "/bienvenue" do
   pseudo = params["pseudo"]
+  cookies["pseudo"] = pseudo
   "Bienvenue sur Twitter, #{pseudo} !
 
    Revenir à l'<a href='/'>accueil</a>"
