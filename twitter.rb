@@ -3,6 +3,7 @@
 require "pry"
 
 require "./tweet.rb"
+require "rainbow"
 
 puts "Qui êtes-vous ?"
 pseudo = gets.strip
@@ -22,6 +23,6 @@ puts "
 tweets = Tweet.depuis_csv
 
 tweets.each do |tweet|
-  puts "#{tweet.contenu} à #{tweet.date} par #{tweet.pseudo}"
+  puts "#{tweet.contenu} à #{tweet.date.foreground(:yellow)} par #{tweet.pseudo.background(:blue).foreground(:white)}"
   puts "-" * 80
 end
