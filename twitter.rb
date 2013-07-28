@@ -10,13 +10,23 @@ require "./tweet.rb"
 get "/" do
   if cookies["pseudo"]
     pseudo = cookies["pseudo"]
+    tweets = Tweet.depuis_csv
+
+    tweets_html = ""
+    tweets.each do |tweet|
+      tweets_html += "<li>#{tweet.contenu} à #{tweet.date} par #{tweet.pseudo}</li>"
+    end
+
     "Bienvenue sur Twitter #{pseudo}
     <br>
     <form action='/deconnexion' method='post'>
       <input type='submit' value='deconnexion'>
     </form>
     <br>
-    Souhaitez-vous <a href='/formulaire_de_tweet'>tweeter</a> ?"
+    Souhaitez-vous <a href='/formulaire_de_tweet'>tweeter</a> ?
+    <ul>
+       #{tweets_html}
+    </ul>"
   else
     redirect '/formulaire_de_connexion'
   end
