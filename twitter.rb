@@ -37,8 +37,16 @@ end
 
 post "/connexion" do
   pseudo = params["pseudo"]
-  cookies["pseudo"] = pseudo
-  redirect '/'
+  mot_de_passe = params["mot_de_passe"]
+
+  utilisateur = Utilisateur.trouver_par_pseudo(pseudo)
+
+  if utilisateur and utilisateur.mot_de_passe == mot_de_passe
+    cookies["pseudo"] = pseudo
+    redirect '/formulaire_de_tweet'
+  else
+    redirect '/formulaire_de_connexion'
+  end
 end
 
 post "/deconnexion" do
