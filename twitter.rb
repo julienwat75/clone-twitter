@@ -1,5 +1,8 @@
 # encoding: utf-8
 
+require "pry"
+binding.pry
+
 require "./tweet.rb"
 
 puts "Qui êtes-vous ?"
