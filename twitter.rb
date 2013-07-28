@@ -7,18 +7,19 @@
 require "pry"
 
 require "sinatra"
-require "sinatra/cookies"
 
 require "./tweet.rb"
 require "./utilisateur.rb"
+
+enable :sessions
 
 # --------------
 # page d'acceuil
 # --------------
 
 get "/" do
-  if cookies["pseudo"]
-    @pseudo = cookies["pseudo"]
+  if session["pseudo"]
+    @pseudo = session["pseudo"]
     @tweets = Tweet.depuis_csv
 
     erb :page_accueil
@@ -42,7 +43,7 @@ post "/connexion" do
   utilisateur = Utilisateur.trouver_par_pseudo(pseudo)
 
   if utilisateur and utilisateur.mot_de_passe == mot_de_passe
-    cookies["pseudo"] = pseudo
+    session["pseudo"] = pseudo
     redirect '/formulaire_de_tweet'
   else
     redirect '/formulaire_de_connexion'
@@ -50,7 +51,7 @@ post "/connexion" do
 end
 
 post "/deconnexion" do
-  cookies.clear
+  session.clear
   redirect '/'
 end
 
@@ -64,7 +65,7 @@ end
 
 post "/publier_un_tweet" do
   contenu = params["contenu"]
-  pseudo = cookies["pseudo"]
+  pseudo = session["pseudo"]
   Tweet.publier(contenu, pseudo)
   redirect '/'
 end
