@@ -10,7 +10,9 @@ get "/" do
     pseudo = cookies["pseudo"]
     "Bienvenue sur Twitter #{pseudo}
     <br>
-    <a href='/deconnexion'>déconnexion</a>"
+    <form action='/deconnexion' method='post'>
+      <input type='submit' value='deconnexion'>
+    </form>"
   else
     redirect '/formulaire_de_connexion'
   end
@@ -19,18 +21,18 @@ end
 get "/formulaire_de_connexion" do
   "Qui êtes-vous ?
 
-  <form action='/connexion'>
+  <form action='/connexion' method='post'>
     <input type='text' name='pseudo'>
   </form>"
 end
 
-get "/connexion" do
+post "/connexion" do
   pseudo = params["pseudo"]
   cookies["pseudo"] = pseudo
   redirect '/'
 end
 
-get '/deconnexion' do
+post '/deconnexion' do
   cookies.clear
   redirect '/'
 end
