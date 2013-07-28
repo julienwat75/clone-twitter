@@ -22,7 +22,5 @@ end
 get "/bienvenue" do
   pseudo = params["pseudo"]
   cookies["pseudo"] = pseudo
-  "Bienvenue sur Twitter, #{pseudo} !
-
-   Revenir à l'<a href='/'>accueil</a>"
+  redirect '/'
 end
