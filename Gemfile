@@ -14,3 +14,4 @@ group :production do
   gem "pg"
 end
 gem "rake"
+gem "twitter"
