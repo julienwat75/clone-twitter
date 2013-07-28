@@ -1,0 +1,16 @@
+#contenu ul {
+  list-style: none;
+  padding:0;
+}
+#contenu ul li {
+  border-bottom: 1px solid hsl(0,0%,90%);
+  overflow: hidden;
+  padding: 10px 0;
+}
+#contenu ul li h2 {
+  float: left;
+}
+.navbar-text {
+  margin-right: 10px;
+}
+

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/styles.css">
+<title>Twitter</title>
+<!-- le framework CSS Twitter Bootstrap -->
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" rel="stylesheet">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>
+
+<!-- nos modifs -->
+<link href="/styles.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <!-- barre de menu -->
+  <div class="navbar navbar-inverse">
+    <a class="navbar-brand" href="/">Twitter</a>
+    <ul class="nav navbar-nav pull-right">
+      <% if session["pseudo"] %>
+      <li>
+        <form action="/deconnexion" method="post">
+          <input class="btn btn-default navbar-btn" type="submit" value="Déconnexion">
+        </form>
+      </li>
+      <% else %>
+      <li>
+        <a class="btn btn-primary navbar-btn" href="/formulaire_de_connexion">Connexion</a>
+      </li>
+      <% end %>
+    </ul>
+    <% if session["pseudo"] %>
+      <p class="navbar-text pull-right">Connecté en tant que <%= session["pseudo"] %></p>
+    <% end %>
+  </div>
+
+  <!-- contenu -->
+  <div id="contenu" class="row">
+    <div class="col-lg-12">
+      <h1>Twitter</h1>
+      <%= yield %>
+    </div>
+  </div>
+</div>
+</body>
+</html>
