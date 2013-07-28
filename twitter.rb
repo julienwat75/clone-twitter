@@ -6,8 +6,14 @@ require "sinatra"
 require "sinatra/cookies"
 
 get "/" do
-  binding.pry
-  "Qui êtes-vous ?
+  if cookies["pseudo"]
+    pseudo = cookies["pseudo"]
+    salutation = "Bienvenue sur Twitter #{pseudo}"
+  else
+    salutation= "Qui êtes-vous ?"
+  end
+  "#{salutation}
+
    <form action='/bienvenue'>
      <input type='text' name='pseudo'>
    </form>"
