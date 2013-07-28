@@ -5,6 +5,7 @@ require "pry"
 require "sinatra"
 
 get "/" do
+  binding.pry
   "Qui êtes-vous ?
 
    <form>
