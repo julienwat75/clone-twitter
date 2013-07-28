@@ -13,6 +13,7 @@ get "/" do
 end
 
 get "/bienvenue" do
+  binding.pry
   pseudo = params["pseudo"]
   "Bienvenue sur Twitter, #{pseudo} !
 
