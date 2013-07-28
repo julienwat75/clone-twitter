@@ -1,5 +1,7 @@
 <div class="jumbotron">
-  <h2>Bienvenue sur Twitter <%= @pseudo %></h2>
+  <h2>Bienvenue sur Twitter
+    <a href='/utilisateurs/<%= utilisateur_courant.pseudo %>'><%= utilisateur_courant.pseudo %></a>
+  </h2>
   <p>Souhaitez-vous ...</p>
   <p><a href="/formulaire_de_tweet" class="btn btn-primary btn-large">tweeter</a> ?</p>
 </div>

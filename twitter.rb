@@ -31,12 +31,9 @@ end
 # --------------
 
 get "/" do
-  if session["pseudo"]
-    @pseudo = session["pseudo"]
-    utilisateur = Utilisateur.find_by_pseudo(@pseudo)
-
+  if utilisateur_courant
     @tweets = []
-    utilisateur.suivis.each do |utilisateur_suivi|
+    utilisateur_courant.suivis.each do |utilisateur_suivi|
        @tweets += utilisateur_suivi.tweets
     end
 
@@ -83,11 +80,9 @@ end
 
 post "/publier_un_tweet" do
   contenu = params["contenu"]
-  pseudo = session["pseudo"]
 
   tweet = Tweet.create(contenu: contenu)
-  utilisateur = Utilisateur.find_by_pseudo(pseudo)
-  utilisateur.tweets << tweet
+  utilisateur_courant.tweets << tweet
 
   redirect '/'
 end
@@ -133,13 +128,10 @@ end
 # -----------------------------------------
 
 post "/suivre" do
-  pseudo_utilisateur_a_suivre = params["pseudo"]
-  utilisateur_a_suivre = Utilisateur.find_by_pseudo(pseudo_utilisateur_a_suivre)
+  pseudo_suivi = params["pseudo"]
+  suivi = Utilisateur.find_by_pseudo(pseudo_suivi)
 
-  pseudo_utilisateur_connecte = session["pseudo"]
-  utilisateur_connecte = Utilisateur.find_by_pseudo(pseudo_utilisateur_connecte)
-
-  utilisateur_connecte.suivis << utilisateur_a_suivre
+  utilisateur_courant.suivis << suivi
 
   redirect '/'
 end
