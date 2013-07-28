@@ -17,6 +17,15 @@ require "./relation.rb"
 
 enable :sessions
 
+# ------------------------------------------
+# récupérer l'utilisateur courant facilement
+# ------------------------------------------
+
+def utilisateur_courant
+  pseudo = session["pseudo"]
+  Utilisateur.find_by_pseudo(pseudo) if pseudo
+end
+
 # --------------
 # page d'acceuil
 # --------------
@@ -119,9 +128,9 @@ get "/utilisateurs" do
   erb :utilisateurs
 end
 
-# ---------------------
-# suivre un utilisateur
-# ---------------------
+# -----------------------------------------
+# suivre - arrêter de suivre un utilisateur
+# -----------------------------------------
 
 post "/suivre" do
   pseudo_utilisateur_a_suivre = params["pseudo"]
@@ -131,6 +140,15 @@ post "/suivre" do
   utilisateur_connecte = Utilisateur.find_by_pseudo(pseudo_utilisateur_connecte)
 
   utilisateur_connecte.suivis << utilisateur_a_suivre
+
+  redirect '/'
+end
+
+post "/arreter-de-suivre" do
+  pseudo_suivi = params["pseudo"]
+  suivi = Utilisateur.find_by_pseudo(pseudo_suivi)
+
+  utilisateur_courant.suivis.delete(suivi)
 
   redirect '/'
 end

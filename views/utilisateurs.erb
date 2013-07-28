@@ -6,10 +6,17 @@
         <%= utilisateur.pseudo %>
       </a>
     </h2>
-    <form action='/suivre' method='post'>
-      <input type='hidden' name='pseudo' value='<%= utilisateur.pseudo %>'>
-      <input class='btn btn-primary pull-right' type='submit' value='suivre'>
-    </form>
+    <% if utilisateur_courant.suivis.include?(utilisateur) %>
+      <form action='/arreter-de-suivre' method='post'>
+        <input type='hidden' name='pseudo' value='<%= utilisateur.pseudo %>'>
+        <input class='btn btn-danger pull-right' type='submit' value='arreter de suivre'>
+      </form>
+    <% else %>
+      <form action='/suivre' method='post'>
+        <input type='hidden' name='pseudo' value='<%= utilisateur.pseudo %>'>
+        <input class='btn btn-primary pull-right' type='submit' value='suivre'>
+      </form>
+    <% end %>
   </li>
 <% end %>
 </ul>
