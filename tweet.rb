@@ -23,7 +23,6 @@ class Tweet
   end
 
   def self.depuis_csv
-    binding.pry
     tweets = []
     CSV.foreach("./tweets.csv") do |ligne|
       contenu = ligne[0]
