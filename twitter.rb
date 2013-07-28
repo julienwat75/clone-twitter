@@ -14,12 +14,12 @@ get "/" do
   end
   "#{salutation}
 
-   <form action='/bienvenue'>
+   <form action='/connexion'>
      <input type='text' name='pseudo'>
    </form>"
 end
 
-get "/bienvenue" do
+get "/connexion" do
   pseudo = params["pseudo"]
   cookies["pseudo"] = pseudo
   redirect '/'
