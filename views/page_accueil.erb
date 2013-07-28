@@ -1,0 +1,12 @@
+Bienvenue sur Twitter <%= @pseudo %>
+<br>
+<form action='/deconnexion' method='post'>
+  <input type='submit' value='deconnexion'>
+</form>
+<br>
+Souhaitez-vous <a href='/formulaire_de_tweet'>tweeter</a> ?
+<ul>
+<% @tweets.each do |tweet| %>
+  <li><%= tweet.contenu %> à <%= tweet.date %> par <%= tweet.pseudo %></li>
+<% end %>
+</ul>
