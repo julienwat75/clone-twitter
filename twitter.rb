@@ -9,7 +9,14 @@ require "pry"
 require "sinatra"
 
 require "sinatra/activerecord"
-set :database, "sqlite3:///twitter.sqlite3"
+
+configure :development do
+  set :database, "sqlite3:///twitter.sqlite3"
+end
+
+configure :production do
+  set :database, ENV["DATABASE_URL"]
+end
 
 require "./tweet.rb"
 require "./utilisateur.rb"
