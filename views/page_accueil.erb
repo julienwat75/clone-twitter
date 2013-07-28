@@ -7,6 +7,6 @@ Bienvenue sur Twitter <%= @pseudo %>
 Souhaitez-vous <a href='/formulaire_de_tweet'>tweeter</a> ?
 <ul>
 <% @tweets.each do |tweet| %>
-  <li><%= tweet.contenu %> à <%= tweet.date %> par <%= tweet.pseudo %></li>
+  <li><%= tweet.contenu %> à <%= tweet.date %> par <%= tweet.utilisateur.pseudo %></li>
 <% end %>
 </ul>

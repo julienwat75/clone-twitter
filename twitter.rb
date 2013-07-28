@@ -8,6 +8,9 @@ require "pry"
 
 require "sinatra"
 
+require "sinatra/activerecord"
+set :database, "sqlite3:///twitter.sqlite3"
+
 require "./tweet.rb"
 require "./utilisateur.rb"
 
@@ -20,7 +23,7 @@ enable :sessions
 get "/" do
   if session["pseudo"]
     @pseudo = session["pseudo"]
-    @tweets = Tweet.depuis_csv
+    @tweets = Tweet.all
 
     erb :page_accueil
   else
@@ -40,7 +43,7 @@ post "/connexion" do
   pseudo = params["pseudo"]
   mot_de_passe = params["mot_de_passe"]
 
-  utilisateur = Utilisateur.trouver_par_pseudo(pseudo)
+  utilisateur = Utilisateur.find_by_pseudo(pseudo)
 
   if utilisateur and utilisateur.mot_de_passe == mot_de_passe
     session["pseudo"] = pseudo
@@ -66,7 +69,11 @@ end
 post "/publier_un_tweet" do
   contenu = params["contenu"]
   pseudo = session["pseudo"]
-  Tweet.publier(contenu, pseudo)
+
+  tweet = Tweet.create(contenu: contenu)
+  utilisateur = Utilisateur.find_by_pseudo(pseudo)
+  utilisateur.tweets << tweet
+
   redirect '/'
 end
 
@@ -81,6 +88,8 @@ end
 post "/creer_compte" do
   pseudo = params["pseudo"]
   mot_de_passe = params["mot_de_passe"]
-  Utilisateur.creer(pseudo, mot_de_passe)
+
+  Utilisateur.create(pseudo: pseudo, mot_de_passe: mot_de_passe)
+
   redirect '/'
 end
