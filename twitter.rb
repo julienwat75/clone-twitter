@@ -13,6 +13,7 @@ set :database, "sqlite3:///twitter.sqlite3"
 
 require "./tweet.rb"
 require "./utilisateur.rb"
+require "./relation.rb"
 
 enable :sessions
 
@@ -23,7 +24,12 @@ enable :sessions
 get "/" do
   if session["pseudo"]
     @pseudo = session["pseudo"]
-    @tweets = Tweet.all
+    utilisateur = Utilisateur.find_by_pseudo(@pseudo)
+
+    @tweets = []
+    utilisateur.suivis.each do |utilisateur_suivi|
+       @tweets += utilisateur_suivi.tweets
+    end
 
     erb :page_accueil
   else
@@ -111,4 +117,20 @@ end
 get "/utilisateurs" do
   @utilisateurs = Utilisateur.all
   erb :utilisateurs
+end
+
+# ---------------------
+# suivre un utilisateur
+# ---------------------
+
+post "/suivre" do
+  pseudo_utilisateur_a_suivre = params["pseudo"]
+  utilisateur_a_suivre = Utilisateur.find_by_pseudo(pseudo_utilisateur_a_suivre)
+
+  pseudo_utilisateur_connecte = session["pseudo"]
+  utilisateur_connecte = Utilisateur.find_by_pseudo(pseudo_utilisateur_connecte)
+
+  utilisateur_connecte.suivis << utilisateur_a_suivre
+
+  redirect '/'
 end

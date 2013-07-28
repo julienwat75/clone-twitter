@@ -1,8 +1,15 @@
 <ul>
 <% @utilisateurs.each do |utilisateur| %>
   <li>
-    <a href='/utilisateurs/<%= utilisateur.pseudo %>'>
-      <%= utilisateur.pseudo %></a>
+    <h2>
+      <a href='/utilisateurs/<%= utilisateur.pseudo %>'>
+        <%= utilisateur.pseudo %>
+      </a>
+    </h2>
+    <form action='/suivre' method='post'>
+      <input type='hidden' name='pseudo' value='<%= utilisateur.pseudo %>'>
+      <input class='btn btn-primary pull-right' type='submit' value='suivre'>
+    </form>
   </li>
 <% end %>
 </ul>
