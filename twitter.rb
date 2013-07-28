@@ -10,6 +10,7 @@ require "sinatra"
 require "sinatra/cookies"
 
 require "./tweet.rb"
+require "./utilisateur.rb"
 
 # --------------
 # page d'acceuil
@@ -57,5 +58,20 @@ post "/publier_un_tweet" do
   contenu = params["contenu"]
   pseudo = cookies["pseudo"]
   Tweet.publier(contenu, pseudo)
+  redirect '/'
+end
+
+# ---------------
+# créer un compte
+# ---------------
+
+get "/formulaire_de_creation_de_compte" do
+  erb :formulaire_de_creation_de_compte
+end
+
+post "/creer_compte" do
+  pseudo = params["pseudo"]
+  mot_de_passe = params["mot_de_passe"]
+  Utilisateur.creer(pseudo, mot_de_passe)
   redirect '/'
 end
