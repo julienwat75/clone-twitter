@@ -103,3 +103,12 @@ get "/utilisateurs/:pseudo" do
   @utilisateur = Utilisateur.find_by_pseudo(pseudo)
   erb :profil_utilisateur
 end
+
+# ----------------------
+# liste des utilisateurs
+# ----------------------
+
+get "/utilisateurs" do
+  @utilisateurs = Utilisateur.all
+  erb :utilisateurs
+end

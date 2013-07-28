@@ -1,0 +1,8 @@
+<ul>
+<% @utilisateurs.each do |utilisateur| %>
+  <li>
+    <a href='/utilisateurs/<%= utilisateur.pseudo %>'>
+      <%= utilisateur.pseudo %></a>
+  </li>
+<% end %>
+</ul>
