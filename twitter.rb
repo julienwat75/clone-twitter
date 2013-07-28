@@ -8,7 +8,9 @@ require "sinatra/cookies"
 get "/" do
   if cookies["pseudo"]
     pseudo = cookies["pseudo"]
-    "Bienvenue sur Twitter #{pseudo}"
+    "Bienvenue sur Twitter #{pseudo}
+    <br>
+    <a href='/deconnexion'>déconnexion</a>"
   else
     redirect '/formulaire_de_connexion'
   end
@@ -25,5 +27,10 @@ end
 get "/connexion" do
   pseudo = params["pseudo"]
   cookies["pseudo"] = pseudo
+  redirect '/'
+end
+
+get '/deconnexion' do
+  cookies.clear
   redirect '/'
 end
