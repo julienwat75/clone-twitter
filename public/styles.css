@@ -2,13 +2,17 @@
   list-style: none;
   padding:0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 background:pink; /* commentaire*/
+=======
+>>>>>>> parent of 7d2d02c... modif
 =======
 >>>>>>> parent of 7d2d02c... modif
 }
 #contenu ul li {
   border-bottom: 1px solid hsl(0,0%,90%);
   overflow: hidden;
+background:yellow;
   padding: 10px 0;
 }
 #contenu ul li h2 {
