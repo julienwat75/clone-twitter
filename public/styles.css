@@ -1,6 +1,7 @@
 #contenu ul {
   list-style: none;
   padding:0;
+background:pink;
 }
 #contenu ul li {
   border-bottom: 1px solid hsl(0,0%,90%);
